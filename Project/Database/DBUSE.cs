@@ -87,7 +87,7 @@ namespace Project.Database
 
         public DataTable MovieList()
         {
-            String sql = "SELECT * FROM member_tbl";
+            String sql = "SELECT * FROM movie_tbl";
             DataTable dt = null;
             OracleDataAdapter adapter;
             OracleCommandBuilder builder;
