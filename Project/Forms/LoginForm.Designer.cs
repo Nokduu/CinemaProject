@@ -55,7 +55,7 @@
             this.BT_login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.BT_login.FlatAppearance.BorderSize = 0;
             this.BT_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_login.Location = new System.Drawing.Point(278, 609);
+            this.BT_login.Location = new System.Drawing.Point(280, 600);
             this.BT_login.Name = "BT_login";
             this.BT_login.Size = new System.Drawing.Size(221, 71);
             this.BT_login.TabIndex = 2;
@@ -78,7 +78,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(565, 609);
+            this.button1.Location = new System.Drawing.Point(560, 600);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(221, 71);
             this.button1.TabIndex = 3;
@@ -120,7 +120,7 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(13, 19);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1037, 36);
             this.panel1.TabIndex = 6;
