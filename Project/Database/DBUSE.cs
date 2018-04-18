@@ -129,10 +129,11 @@ namespace Project.Database
             return list;
         }
 
-        public void MovieInsert(Model.Movie_tbl movie_Tbl)
+        public int MovieInsert(Model.Movie_tbl movie_Tbl)
         {
             String sql = "";
 
+            int chk = 0;
 
             try
             {
@@ -147,7 +148,6 @@ namespace Project.Database
                 sql += "VALUES (:Movie_no, :Title, :Genre, :PlayDate, " +
                     ":Time, :Image)";
 
-                MessageBox.Show(movie_Tbl.playdate + "/" + movie_Tbl.time);
                 cmd = new OracleCommand(sql, con);
 
                 cmd.Parameters.Add(":Movie_No", OracleDbType.Int32).Value = movie_Tbl.Movie_No;
@@ -162,16 +162,14 @@ namespace Project.Database
             }
             catch(Exception e)
             {
-                con.Close();
                 MessageBox.Show("업로드 실패");
-                MessageBox.Show(e+"");
-                MessageBox.Show(sql);
+                chk = 1;                
             }
             finally
             {
                 con.Close();
             }
-
+            return chk;
         }
     }
 }

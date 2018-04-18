@@ -82,11 +82,13 @@
             this.DTP_time.CustomFormat = "";
             this.DTP_time.Location = new System.Drawing.Point(321, 120);
             this.DTP_time.Name = "DTP_time";
+            this.DTP_time.ShowUpDown = true;
             this.DTP_time.Size = new System.Drawing.Size(100, 21);
             this.DTP_time.TabIndex = 4;
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::Project.Properties.Resources.NoImage;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(214, 289);
@@ -96,7 +98,8 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.AddExtension = false;
+            this.openFileDialog1.Filter = "Images|*.png;*.jpg;*.jpeg;*.bmp;";
             // 
             // BTN_image
             // 

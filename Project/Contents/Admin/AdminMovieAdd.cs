@@ -14,9 +14,12 @@ namespace Project.Contents.Admin
 {
     public partial class AdminMovieAdd : Form
     {
-        public AdminMovieAdd()
+        AdminMovieContent content;
+        public AdminMovieAdd(AdminMovieContent content)
         {
             InitializeComponent();
+            this.content = content;
+ 
             DTP_playdate.Format = DateTimePickerFormat.Custom;
             DTP_playdate.CustomFormat = "yyyy-MM-dd";
             DTP_playdate.MinDate = DateTime.Today;
@@ -38,6 +41,7 @@ namespace Project.Contents.Admin
 
         private void Exit_Click(object sender, EventArgs e)
         {
+            content.selectList();
             this.Close();
         }
 
@@ -45,7 +49,12 @@ namespace Project.Contents.Admin
         {
             Movie_tbl movie_Tbl = new Movie_tbl();
 
-            movie_Tbl.Movie_No = Convert.ToInt32(TB_MovieNo.Text);
+
+            try
+            {
+                movie_Tbl.Movie_No = Convert.ToInt32(TB_MovieNo.Text);
+            }
+            catch (Exception ex) {}
             movie_Tbl.Title = TB_MovieTitle.Text;
             movie_Tbl.genre = TB_MovieGenre.Text;
             movie_Tbl.playdate = DTP_playdate.Value;
@@ -53,7 +62,12 @@ namespace Project.Contents.Admin
             movie_Tbl.Image = openFileDialog1.FileName;
 
             DBUSE dbuse = new DBUSE();
-            dbuse.MovieInsert(movie_Tbl);
+            int chk = dbuse.MovieInsert(movie_Tbl);
+            if (chk == 0)
+            {
+                content.selectList();
+                this.Close();
+            }
         }
     }
 }
