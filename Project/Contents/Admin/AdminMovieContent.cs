@@ -56,6 +56,11 @@ namespace Project.Contents.Admin
                 genre.Dock = DockStyle.Top;
                 genre.TextAlign = ContentAlignment.MiddleCenter;
 
+                Label times = new Label();
+                times.Text = "상영날짜:"+list[i].playdate + "/상영 시간:" + list[i].time;
+                times.Dock = DockStyle.Top;
+                times.TextAlign = ContentAlignment.MiddleLeft;
+
 
                 Panel btn_panel = new Panel();
                 btn_panel.Height = 25;
@@ -80,6 +85,7 @@ namespace Project.Contents.Admin
                 btn_panel.Controls.Add(btn_update);
 
                 panel.Controls.Add(btn_panel);
+                panel.Controls.Add(times);
                 panel.Controls.Add(genre);
                 panel.Controls.Add(pb);
                 panel.Controls.Add(No_Title);
@@ -99,6 +105,14 @@ namespace Project.Contents.Admin
         private void movie_update(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+
+            int movie_no = 0;
+            try
+            {
+                movie_no = Convert.ToInt32(btn.Tag);
+            }catch(Exception ex) { Console.WriteLine(ex); }
+
+            AdminMovieUpdate amu = new AdminMovieUpdate(this,movie_no);
             MessageBox.Show(btn.Tag+"");
         }
 

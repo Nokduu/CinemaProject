@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,22 +13,37 @@ using Project.Database.Model;
 
 namespace Project.Contents.Admin
 {
-    public partial class AdminMovieAdd : Form
+    public partial class AdminMovieUpdate : Form
     {
+        DBUSE dbuse;
         AdminMovieContent content;
-        public AdminMovieAdd(AdminMovieContent content)
+        public AdminMovieUpdate(AdminMovieContent content, int movie_no)
         {
             InitializeComponent();
             this.content = content;
- 
+
+            dbuse = new DBUSE();
+            Movie_tbl movie_Tbl = new Movie_tbl();
+            movie_Tbl = dbuse.MovieSelect(movie_no);
+
             DTP_playdate.Format = DateTimePickerFormat.Custom;
             DTP_playdate.CustomFormat = "yyyy-MM-dd";
             DTP_playdate.MinDate = DateTime.Today;
 
-
             DTP_time.Format = DateTimePickerFormat.Custom;
-            DTP_time.CustomFormat = "HH:mm";
+            DTP_time.CustomFormat = "hh:mm:ss";
             DTP_time.MinDate = DateTime.Today;
+
+
+            TB_MovieNo.Text = movie_Tbl.Movie_No.ToString();
+            TB_MovieTitle.Text = movie_Tbl.Title;
+            TB_MovieGenre.Text = movie_Tbl.genre;
+            DTP_playdate.Value = movie_Tbl.playdate;
+            DTP_time.Value = movie_Tbl.time;
+            pictureBox1.Image = new Bitmap(new MemoryStream(movie_Tbl.ImageFile, 0, movie_Tbl.ImageFile.Length));
+            openFileDialog1.FileName = pictureBox1.ImageLocation;
+
+
         }
 
         private void BTN_image_Click(object sender, EventArgs e)
@@ -54,14 +70,13 @@ namespace Project.Contents.Admin
             {
                 movie_Tbl.Movie_No = Convert.ToInt32(TB_MovieNo.Text);
             }
-            catch (Exception ex) { Console.WriteLine(ex); }
+            catch (Exception ex) { MessageBox.Show(ex + ""); }
             movie_Tbl.Title = TB_MovieTitle.Text;
             movie_Tbl.genre = TB_MovieGenre.Text;
             movie_Tbl.playdate = DTP_playdate.Value;
             movie_Tbl.time = DTP_time.Value;
             movie_Tbl.Image = openFileDialog1.FileName;
 
-            DBUSE dbuse = new DBUSE();
             int chk = dbuse.MovieInsert(movie_Tbl);
             if (chk == 0)
             {
@@ -69,6 +84,5 @@ namespace Project.Contents.Admin
                 this.Close();
             }
         }
-
     }
 }

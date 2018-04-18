@@ -1,6 +1,6 @@
 ﻿namespace Project.Contents.Admin
 {
-    partial class AdminMovieAdd
+    partial class AdminMovieUpdate
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@
             this.TB_MovieGenre = new System.Windows.Forms.TextBox();
             this.DTP_playdate = new System.Windows.Forms.DateTimePicker();
             this.DTP_time = new System.Windows.Forms.DateTimePicker();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BTN_image = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,6 +85,16 @@
             this.DTP_time.ShowUpDown = true;
             this.DTP_time.Size = new System.Drawing.Size(100, 21);
             this.DTP_time.TabIndex = 4;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Project.Properties.Resources.NoImage;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(214, 289);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // openFileDialog1
             // 
@@ -174,16 +184,6 @@
             this.button2.Text = "취소";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Exit_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Project.Properties.Resources.NoImage;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(214, 289);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
             // 
             // AdminMovieAdd
             // 

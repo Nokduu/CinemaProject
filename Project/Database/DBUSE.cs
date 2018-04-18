@@ -88,17 +88,58 @@ namespace Project.Database
 
         }
 
+        public Movie_tbl MovieSelect(int Movie_No)
+        {
+            Movie_tbl movie = new Movie_tbl();
+
+            movie.Movie_No = Movie_No;
+
+            String sql = "";
+            try
+            {
+                con.Open();
+                sql += "SELECT Title, Genre, PlayDate, Time, ImageFIle From Movie_TBL WHERE Movie_No=:Movie_No";
+                cmd = new OracleCommand(sql, con);
+                cmd.Parameters.Add(":Movie_No", OracleDbType.Int32).Value = movie.Movie_No;
+                OracleDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    movie.Title = Convert.ToString(reader.GetValue(0));
+                    movie.genre = Convert.ToString(reader.GetValue(1));
+                    movie.playdate = Convert.ToDateTime(reader.GetValue(2));
+                    movie.time = Convert.ToDateTime(reader.GetValue(3));
+                    movie.ImageFile = (byte[])reader.GetValue(4);
+                }
+
+
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+
+            return movie;
+        }
+
         public List<Movie_tbl> MovieList()
         {
             String sql = "SELECT * FROM movie_tbl";
             Movie_tbl movie;
             List<Movie_tbl> list = new List<Movie_tbl>();
+            OracleDataReader dataReader = null;
             try
             {
                 con.Open();
 
                 cmd = new OracleCommand(sql, con);
-                OracleDataReader dataReader = cmd.ExecuteReader();
+                dataReader = cmd.ExecuteReader();
+
 
                 while (dataReader.Read())
                 {
@@ -122,6 +163,7 @@ namespace Project.Database
             }
             finally
             {
+                dataReader.Close();
                 con.Close();
             }
 
@@ -129,7 +171,47 @@ namespace Project.Database
             return list;
         }
 
-        public int MovieInsert(Model.Movie_tbl movie_Tbl)
+        public void MovieUpdate(Movie_tbl movie_Tbl)
+        {
+            String sql = "";
+
+            try
+            {
+                con.Open();
+
+                FileStream fs = new FileStream(movie_Tbl.Image, FileMode.Open, FileAccess.Read);
+                byte[] Image = new byte[fs.Length];
+                fs.Read(Image, 0, (int)fs.Length);
+                fs.Close();
+
+                sql += "UPDATE Movie_TBL SET Title =:Title, Genre =:Genre, PlayDate =:PlayDate, " +
+                    "Time =:Time, Image =:Image WHERE Movie_No =:Movie_No";
+                
+
+                cmd = new OracleCommand(sql, con);
+
+                cmd.Parameters.Add(":Movie_No", OracleDbType.Int32).Value = movie_Tbl.Movie_No;
+                cmd.Parameters.Add(":Title", OracleDbType.Varchar2).Value = movie_Tbl.Title;
+                cmd.Parameters.Add(":Genre", OracleDbType.Varchar2).Value = movie_Tbl.genre;
+                cmd.Parameters.Add(":PlayDate", OracleDbType.Date).Value = movie_Tbl.playdate;
+                cmd.Parameters.Add(":Time", OracleDbType.Date).Value = movie_Tbl.time;
+                cmd.Parameters.Add(":Image", OracleDbType.Blob).Value = Image;
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("업데이트 성공");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("업데이트 실패");
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public int MovieInsert(Movie_tbl movie_Tbl)
         {
             String sql = "";
 
@@ -163,6 +245,7 @@ namespace Project.Database
             catch(Exception e)
             {
                 MessageBox.Show("업로드 실패");
+                Console.WriteLine(e);
                 chk = 1;                
             }
             finally

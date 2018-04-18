@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Admin\AdminMovieUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contents\Admin\AdminMovieUpdate.Designer.cs">
+      <DependentUpon>AdminMovieUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Contents\Admin\AdminMovieAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Contents\Admin\AdminMovieUpdate.resx">
+      <DependentUpon>AdminMovieUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contents\Admin\AdminMovieAdd.resx">
       <DependentUpon>AdminMovieAdd.cs</DependentUpon>
     </EmbeddedResource>
