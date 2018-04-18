@@ -28,6 +28,8 @@ namespace Project.Database.Model
         // 이미지 경로 
         public string Image { get; set; }
 
+        public byte[] ImageFile { get; set; }
+
         // Movie_tbl 모델 복사
         public void CopyData(Movie_tbl param)
         {

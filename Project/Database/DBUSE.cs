@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using Project.Database;
+using Project.Database.Model;
 
 namespace Project.Database
 {
@@ -86,20 +88,32 @@ namespace Project.Database
 
         }
 
-        public DataTable MovieList()
+        public List<Movie_tbl> MovieList()
         {
             String sql = "SELECT * FROM movie_tbl";
-            DataTable dt = null;
-            OracleDataAdapter adapter;
-            OracleCommandBuilder builder;
+            Movie_tbl movie;
+            List<Movie_tbl> list = new List<Movie_tbl>();
             try
             {
                 con.Open();
 
-                adapter = new OracleDataAdapter(sql, con);
-                builder = new OracleCommandBuilder(adapter);
-                dt = new DataTable();
-                adapter.Fill(dt);
+                cmd = new OracleCommand(sql, con);
+                OracleDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    movie = new Movie_tbl();
+
+                    movie.Movie_No = Convert.ToInt32(dataReader.GetValue(0));
+                    movie.Title = Convert.ToString(dataReader.GetValue(1));
+                    movie.genre = Convert.ToString(dataReader.GetValue(2));
+                    movie.playdate = Convert.ToDateTime(dataReader.GetValue(3));
+                    movie.time = Convert.ToDateTime(dataReader.GetValue(4));
+                    movie.ImageFile = (byte[])dataReader.GetValue(5);
+
+
+                    list.Add(movie);
+                }
 
 
             }catch(Exception e)
@@ -112,7 +126,7 @@ namespace Project.Database
             }
 
 
-            return dt;
+            return list;
         }
 
         public void MovieInsert(Model.Movie_tbl movie_Tbl)
@@ -130,8 +144,8 @@ namespace Project.Database
                 fs.Close();
 
                 sql += "INSERT INTO MOVIE_TBL (Movie_No, Title, Genre, PlayDate, Time, Image) ";
-                sql += "VALUES (:Movie_no, :Title, :Genre, TO_CHAR(TO_DATE(:PlayDate,'YYYY-MM-DD tt h:mm:ss'),'YYYY-MM-DD'), " +
-                    "TO_CHAR(TO_DATE(:Time,'YYYY-MM-DD tt h:mm:ss'),'HH24:MI:SS'), :Image)";
+                sql += "VALUES (:Movie_no, :Title, :Genre, :PlayDate, " +
+                    ":Time, :Image)";
 
                 MessageBox.Show(movie_Tbl.playdate + "/" + movie_Tbl.time);
                 cmd = new OracleCommand(sql, con);
@@ -139,8 +153,8 @@ namespace Project.Database
                 cmd.Parameters.Add(":Movie_No", OracleDbType.Int32).Value = movie_Tbl.Movie_No;
                 cmd.Parameters.Add(":Title", OracleDbType.Varchar2).Value = movie_Tbl.Title;
                 cmd.Parameters.Add(":Genre", OracleDbType.Varchar2).Value = movie_Tbl.genre;
-                cmd.Parameters.Add(":PlayDate", OracleDbType.Varchar2).Value = movie_Tbl.playdate;
-                cmd.Parameters.Add(":Time", OracleDbType.Varchar2).Value = movie_Tbl.time;
+                cmd.Parameters.Add(":PlayDate", OracleDbType.Date).Value = movie_Tbl.playdate;
+                cmd.Parameters.Add(":Time", OracleDbType.Date).Value = movie_Tbl.time;
                 cmd.Parameters.Add(":Image", OracleDbType.Blob).Value = Image;
 
                 cmd.ExecuteNonQuery();
