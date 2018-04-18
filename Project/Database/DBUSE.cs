@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +113,51 @@ namespace Project.Database
 
 
             return dt;
+        }
+
+        public void MovieInsert(Model.Movie_tbl movie_Tbl)
+        {
+            String sql = "";
+
+
+            try
+            {
+                con.Open();
+
+                FileStream fs = new FileStream(movie_Tbl.Image, FileMode.Open, FileAccess.Read);
+                byte[] Image = new byte[fs.Length];
+                fs.Read(Image, 0, (int)fs.Length);
+                fs.Close();
+
+                sql += "INSERT INTO MOVIE_TBL (Movie_No, Title, Genre, PlayDate, Time, Image) ";
+                sql += "VALUES (:Movie_no, :Title, :Genre, TO_CHAR(TO_DATE(:PlayDate,'YYYY-MM-DD tt h:mm:ss'),'YYYY-MM-DD'), " +
+                    "TO_CHAR(TO_DATE(:Time,'YYYY-MM-DD tt h:mm:ss'),'HH24:MI:SS'), :Image)";
+
+                MessageBox.Show(movie_Tbl.playdate + "/" + movie_Tbl.time);
+                cmd = new OracleCommand(sql, con);
+
+                cmd.Parameters.Add(":Movie_No", OracleDbType.Int32).Value = movie_Tbl.Movie_No;
+                cmd.Parameters.Add(":Title", OracleDbType.Varchar2).Value = movie_Tbl.Title;
+                cmd.Parameters.Add(":Genre", OracleDbType.Varchar2).Value = movie_Tbl.genre;
+                cmd.Parameters.Add(":PlayDate", OracleDbType.Varchar2).Value = movie_Tbl.playdate;
+                cmd.Parameters.Add(":Time", OracleDbType.Varchar2).Value = movie_Tbl.time;
+                cmd.Parameters.Add(":Image", OracleDbType.Blob).Value = Image;
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("업로드 성공");
+            }
+            catch(Exception e)
+            {
+                con.Close();
+                MessageBox.Show("업로드 실패");
+                MessageBox.Show(e+"");
+                MessageBox.Show(sql);
+            }
+            finally
+            {
+                con.Close();
+            }
+
         }
     }
 }
