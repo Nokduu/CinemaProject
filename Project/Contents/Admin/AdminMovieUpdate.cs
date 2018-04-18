@@ -28,18 +28,16 @@ namespace Project.Contents.Admin
 
             DTP_playdate.Format = DateTimePickerFormat.Custom;
             DTP_playdate.CustomFormat = "yyyy-MM-dd";
-            DTP_playdate.MinDate = DateTime.Today;
 
             DTP_time.Format = DateTimePickerFormat.Custom;
-            DTP_time.CustomFormat = "hh:mm:ss";
-            DTP_time.MinDate = DateTime.Today;
+            DTP_time.CustomFormat = "HH:mm";
 
-
+            MessageBox.Show(movie_Tbl.Movie_No + "/" + movie_Tbl.Title + "/" + movie_Tbl.genre + "/" + movie_Tbl.playdate + "/" + movie_Tbl.time);
             TB_MovieNo.Text = movie_Tbl.Movie_No.ToString();
             TB_MovieTitle.Text = movie_Tbl.Title;
             TB_MovieGenre.Text = movie_Tbl.genre;
-            DTP_playdate.Value = movie_Tbl.playdate;
-            DTP_time.Value = movie_Tbl.time;
+            DTP_playdate.MinDate = movie_Tbl.playdate;
+            DTP_time.MinDate = movie_Tbl.time;
             pictureBox1.Image = new Bitmap(new MemoryStream(movie_Tbl.ImageFile, 0, movie_Tbl.ImageFile.Length));
             openFileDialog1.FileName = pictureBox1.ImageLocation;
 

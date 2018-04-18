@@ -113,6 +113,7 @@ namespace Project.Contents.Admin
             }catch(Exception ex) { Console.WriteLine(ex); }
 
             AdminMovieUpdate amu = new AdminMovieUpdate(this,movie_no);
+            amu.Show();
             MessageBox.Show(btn.Tag+"");
         }
 

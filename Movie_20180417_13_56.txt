@@ -1,0 +1,334 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- Movie_tbl Table Create SQL
+CREATE TABLE Movie_tbl
+(
+    Movie_No    NUMBER(18, 0)    NOT NULL, 
+    Title       VARCHAR2(255)    NOT NULL, 
+    genre       VARCHAR2(255)    NOT NULL, 
+    playdate    DATE             NOT NULL, 
+    time        DATE             NOT NULL, 
+    Image       BLOB             NOT NULL, 
+    CONSTRAINT MOVIE_TBL_PK PRIMARY KEY (Movie_No)
+)
+/
+
+COMMENT ON TABLE Movie_tbl IS '영화 정보'
+/
+
+COMMENT ON COLUMN Movie_tbl.Movie_No IS '영화 번호'
+/
+
+COMMENT ON COLUMN Movie_tbl.Title IS '영화 제목'
+/
+
+COMMENT ON COLUMN Movie_tbl.genre IS '영화 장르'
+/
+
+COMMENT ON COLUMN Movie_tbl.playdate IS '개봉일'
+/
+
+COMMENT ON COLUMN Movie_tbl.time IS '상영 시간'
+/
+
+COMMENT ON COLUMN Movie_tbl.Image IS '이미지'
+/
+
+
+-- Cinema_tbl Table Create SQL
+CREATE TABLE Cinema_tbl
+(
+    Cinema_No    NUMBER(18, 0)    NOT NULL, 
+    name         VARCHAR2(20)     NOT NULL, 
+    CONSTRAINT CINEMA_TBL_PK PRIMARY KEY (Cinema_No)
+)
+/
+
+COMMENT ON TABLE Cinema_tbl IS '영화관 정보'
+/
+
+COMMENT ON COLUMN Cinema_tbl.Cinema_No IS '영화관 번호'
+/
+
+COMMENT ON COLUMN Cinema_tbl.name IS '영화관 이름'
+/
+
+
+-- Cinema_Movie_tbl Table Create SQL
+CREATE TABLE Cinema_Movie_tbl
+(
+    Cinema_No     NUMBER(18, 0)    NOT NULL, 
+    Movie_No      NUMBER(18, 0)    NOT NULL, 
+    Start_date    DATE             NOT NULL, 
+    End_date      DATE             NOT NULL, 
+    CONSTRAINT CINEMA_MOVIE_TBL_PK PRIMARY KEY (Cinema_No, Movie_No)
+)
+/
+
+COMMENT ON TABLE Cinema_Movie_tbl IS '상영 정보'
+/
+
+COMMENT ON COLUMN Cinema_Movie_tbl.Cinema_No IS '영화관 번호'
+/
+
+COMMENT ON COLUMN Cinema_Movie_tbl.Movie_No IS '영화 번호'
+/
+
+COMMENT ON COLUMN Cinema_Movie_tbl.Start_date IS '시작일'
+/
+
+COMMENT ON COLUMN Cinema_Movie_tbl.End_date IS '종료일'
+/
+
+ALTER TABLE Cinema_Movie_tbl
+    ADD CONSTRAINT FK_Cinema_Movie_tbl_Cinema_No_ FOREIGN KEY (Cinema_No)
+        REFERENCES Cinema_tbl (Cinema_No)
+/
+
+ALTER TABLE Cinema_Movie_tbl
+    ADD CONSTRAINT FK_Cinema_Movie_tbl_Movie_No_M FOREIGN KEY (Movie_No)
+        REFERENCES Movie_tbl (Movie_No)
+/
+
+
+-- Time_tbl Table Create SQL
+CREATE TABLE Time_tbl
+(
+    Time_No       NUMBER(18, 0)    NOT NULL, 
+    Start_time    VARCHAR2(20)     NOT NULL, 
+    End_time      VARCHAR2(20)     NOT NULL, 
+    Movie_Date    DATE             NOT NULL, 
+    Movie_cnt     NUMBER           NOT NULL, 
+    Cinema_No     NUMBER(18, 0)    NOT NULL, 
+    Movie_No      NUMBER(18, 0)    NOT NULL, 
+    CONSTRAINT TIME_TBL_PK PRIMARY KEY (Time_No)
+)
+/
+
+COMMENT ON TABLE Time_tbl IS '상영 일정'
+/
+
+COMMENT ON COLUMN Time_tbl.Time_No IS '상영 번호'
+/
+
+COMMENT ON COLUMN Time_tbl.Start_time IS '시작시간'
+/
+
+COMMENT ON COLUMN Time_tbl.End_time IS '종료시간'
+/
+
+COMMENT ON COLUMN Time_tbl.Movie_Date IS '상영일'
+/
+
+COMMENT ON COLUMN Time_tbl.Movie_cnt IS '상영회차'
+/
+
+COMMENT ON COLUMN Time_tbl.Cinema_No IS '영화관 번호'
+/
+
+COMMENT ON COLUMN Time_tbl.Movie_No IS '영화 번호'
+/
+
+ALTER TABLE Time_tbl
+    ADD CONSTRAINT FK_Time_tbl_Cinema_No_Cinema_M FOREIGN KEY (Cinema_No)
+        REFERENCES Cinema_Movie_tbl (Cinema_No)
+/
+
+ALTER TABLE Time_tbl
+    ADD CONSTRAINT FK_Time_tbl_Movie_No_Cinema_Mo FOREIGN KEY (Movie_No)
+        REFERENCES Cinema_Movie_tbl (Movie_No)
+/
+
+
+-- Theater_tbl Table Create SQL
+CREATE TABLE Theater_tbl
+(
+    Theater_No    NUMBER(18, 0)    NOT NULL, 
+    Cinema_No     NUMBER(18, 0)    NOT NULL, 
+    CONSTRAINT THEATER_TBL_PK PRIMARY KEY (Theater_No)
+)
+/
+
+COMMENT ON TABLE Theater_tbl IS '상영관 정보'
+/
+
+COMMENT ON COLUMN Theater_tbl.Theater_No IS '상영관 번호'
+/
+
+COMMENT ON COLUMN Theater_tbl.Cinema_No IS '영화관 번호'
+/
+
+ALTER TABLE Theater_tbl
+    ADD CONSTRAINT FK_Theater_tbl_Cinema_No_Cinem FOREIGN KEY (Cinema_No)
+        REFERENCES Cinema_tbl (Cinema_No)
+/
+
+
+-- Member_tbl Table Create SQL
+CREATE TABLE Member_tbl
+(
+    Member_No    NUMBER(18, 0)    NOT NULL, 
+    id           VARCHAR2(255)    NOT NULL, 
+    password     VARCHAR2(255)    NOT NULL, 
+    name         VARCHAR2(255)    NOT NULL, 
+    phone        VARCHAR2(255)    NOT NULL, 
+    grade        VARCHAR2(20)     NOT NULL, 
+    address      VARCHAR2(255)    NOT NULL, 
+    CONSTRAINT MEMBER_TBL_PK PRIMARY KEY (Member_No)
+)
+/
+
+CREATE SEQUENCE Member_tbl_SEQ
+START WITH 1
+INCREMENT BY 1;
+/
+
+COMMENT ON TABLE Member_tbl IS '회원 정보'
+/
+
+COMMENT ON COLUMN Member_tbl.Member_No IS '회원 번호'
+/
+
+COMMENT ON COLUMN Member_tbl.id IS '아이디'
+/
+
+COMMENT ON COLUMN Member_tbl.password IS '비밀번호'
+/
+
+COMMENT ON COLUMN Member_tbl.name IS '이름'
+/
+
+COMMENT ON COLUMN Member_tbl.phone IS '전화번호'
+/
+
+COMMENT ON COLUMN Member_tbl.grade IS '회원 등급'
+/
+
+COMMENT ON COLUMN Member_tbl.address IS '주소'
+/
+
+
+-- Seat_tbl Table Create SQL
+CREATE TABLE Seat_tbl
+(
+    Seat_No       NUMBER(18, 0)    NOT NULL, 
+    Theater_No    NUMBER(18, 0)    NOT NULL, 
+    Seat_row      VARCHAR2(20)     NOT NULL, 
+    Seat_col      VARCHAR2(20)     NOT NULL, 
+    CONSTRAINT SEAT_TBL_PK PRIMARY KEY (Seat_No)
+)
+/
+
+COMMENT ON TABLE Seat_tbl IS '좌석 정보'
+/
+
+COMMENT ON COLUMN Seat_tbl.Seat_No IS '좌석 번호'
+/
+
+COMMENT ON COLUMN Seat_tbl.Theater_No IS '상영관 번호'
+/
+
+COMMENT ON COLUMN Seat_tbl.Seat_row IS '좌석 행'
+/
+
+COMMENT ON COLUMN Seat_tbl.Seat_col IS '좌석 열'
+/
+
+ALTER TABLE Seat_tbl
+    ADD CONSTRAINT FK_Seat_tbl_Theater_No_Theater FOREIGN KEY (Theater_No)
+        REFERENCES Theater_tbl (Theater_No)
+/
+
+
+-- Ticketing_tbl Table Create SQL
+CREATE TABLE Ticketing_tbl
+(
+    Ticketing_No    NUMBER(18, 0)    NOT NULL, 
+    Movie_No        NUMBER(18, 0)    NOT NULL, 
+    Member_No       NUMBER(18, 0)    NOT NULL, 
+    Cinema_No       NUMBER(18, 0)    NOT NULL, 
+    Time_No         NUMBER(18, 0)    NOT NULL, 
+    Price           NUMBER(18, 0)    NOT NULL, 
+    People          NUMBER(18, 0)    NOT NULL, 
+    CONSTRAINT TICKETING_TBL_PK PRIMARY KEY (Ticketing_No)
+)
+/
+
+COMMENT ON TABLE Ticketing_tbl IS '티켓 정보'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.Ticketing_No IS '티켓 번호'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.Movie_No IS '영화 번호'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.Member_No IS '회원 번호'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.Cinema_No IS '영화관 번호'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.Time_No IS '상영 번호'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.Price IS '가격'
+/
+
+COMMENT ON COLUMN Ticketing_tbl.People IS '인원 수'
+/
+
+ALTER TABLE Ticketing_tbl
+    ADD CONSTRAINT FK_Ticketing_tbl_Movie_No_Cine FOREIGN KEY (Movie_No)
+        REFERENCES Cinema_Movie_tbl (Movie_No)
+/
+
+ALTER TABLE Ticketing_tbl
+    ADD CONSTRAINT FK_Ticketing_tbl_Member_No_Mem FOREIGN KEY (Member_No)
+        REFERENCES Member_tbl (Member_No)
+/
+
+ALTER TABLE Ticketing_tbl
+    ADD CONSTRAINT FK_Ticketing_tbl_Cinema_No_Cin FOREIGN KEY (Cinema_No)
+        REFERENCES Cinema_Movie_tbl (Cinema_No)
+/
+
+ALTER TABLE Ticketing_tbl
+    ADD CONSTRAINT FK_Ticketing_tbl_Time_No_Time_ FOREIGN KEY (Time_No)
+        REFERENCES Time_tbl (Time_No)
+/
+
+
+-- Per_Seat_tbl Table Create SQL
+CREATE TABLE Per_Seat_tbl
+(
+    Seat_No        NUMBER(18, 0)    NOT NULL, 
+    Time_No        NUMBER(18, 0)    NOT NULL, 
+    Seat_Status    CHAR(1)          NOT NULL, 
+    CONSTRAINT PER_SEAT_TBL_PK PRIMARY KEY (Seat_No, Time_No)
+)
+/
+
+COMMENT ON TABLE Per_Seat_tbl IS '좌석 일정'
+/
+
+COMMENT ON COLUMN Per_Seat_tbl.Seat_No IS '좌석 번호'
+/
+
+COMMENT ON COLUMN Per_Seat_tbl.Time_No IS '상영 번호'
+/
+
+COMMENT ON COLUMN Per_Seat_tbl.Seat_Status IS '예약 여부'
+/
+
+ALTER TABLE Per_Seat_tbl
+    ADD CONSTRAINT FK_Per_Seat_tbl_Seat_No_Seat_t FOREIGN KEY (Seat_No)
+        REFERENCES Seat_tbl (Seat_No)
+/
+
+ALTER TABLE Per_Seat_tbl
+    ADD CONSTRAINT FK_Per_Seat_tbl_Time_No_Time_t FOREIGN KEY (Time_No)
+        REFERENCES Time_tbl (Time_No)
+/
+
+

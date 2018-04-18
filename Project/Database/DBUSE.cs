@@ -98,9 +98,8 @@ namespace Project.Database
             try
             {
                 con.Open();
-                sql += "SELECT Title, Genre, PlayDate, Time, ImageFIle From Movie_TBL WHERE Movie_No=:Movie_No";
+                sql += "SELECT Title, Genre, PlayDate, Time, Image FROM Movie_TBL WHERE Movie_No='"+Movie_No+"'";
                 cmd = new OracleCommand(sql, con);
-                cmd.Parameters.Add(":Movie_No", OracleDbType.Int32).Value = movie.Movie_No;
                 OracleDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
@@ -111,6 +110,7 @@ namespace Project.Database
                     movie.time = Convert.ToDateTime(reader.GetValue(3));
                     movie.ImageFile = (byte[])reader.GetValue(4);
                 }
+
 
 
 

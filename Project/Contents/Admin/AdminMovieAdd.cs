@@ -27,7 +27,6 @@ namespace Project.Contents.Admin
 
             DTP_time.Format = DateTimePickerFormat.Custom;
             DTP_time.CustomFormat = "HH:mm";
-            DTP_time.MinDate = DateTime.Today;
         }
 
         private void BTN_image_Click(object sender, EventArgs e)
