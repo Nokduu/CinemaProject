@@ -32,6 +32,7 @@
             this.BT_login = new System.Windows.Forms.Button();
             this.TB_pw = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TB_id
@@ -68,11 +69,19 @@
             this.label1.Text = "회원가입";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(150, 65);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 4;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TB_pw);
             this.Controls.Add(this.BT_login);
@@ -90,6 +99,7 @@
         private System.Windows.Forms.Button BT_login;
         private System.Windows.Forms.TextBox TB_pw;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
