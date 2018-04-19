@@ -54,5 +54,15 @@ namespace Project.Forms
             GraphPath.AddArc(Rect.X, Rect.Y + Rect.Height - 50, 50, 50, 90, 90);
             this.Region = new Region(GraphPath);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BT_login_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

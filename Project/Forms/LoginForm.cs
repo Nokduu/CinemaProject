@@ -77,5 +77,10 @@ namespace Project
                                                       , int nBottomRect
                                                       , int nWidthEllipse
                                                       , int nHeightEllipse);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
