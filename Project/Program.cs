@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,10 +22,10 @@ namespace Project
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            LoginForm lf = new LoginForm();
-            ac.MainForm = lf;
+           // LoginForm lf = new LoginForm();
+           // ac.MainForm = lf;
 
-            Application.Run(ac);
+            Application.Run(new LoginForm());
         }
     }
 }
