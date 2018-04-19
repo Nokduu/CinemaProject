@@ -28,6 +28,7 @@ namespace Project.Contents.Admin
 
             DTP_playdate.Format = DateTimePickerFormat.Custom;
             DTP_playdate.CustomFormat = "yyyy-MM-dd";
+            
 
             DTP_time.Format = DateTimePickerFormat.Custom;
             DTP_time.CustomFormat = "HH:mm";
@@ -37,7 +38,9 @@ namespace Project.Contents.Admin
             TB_MovieTitle.Text = movie_Tbl.Title;
             TB_MovieGenre.Text = movie_Tbl.genre;
             DTP_playdate.MinDate = movie_Tbl.playdate;
+            DTP_playdate.Value = movie_Tbl.playdate;
             DTP_time.MinDate = movie_Tbl.time;
+            DTP_time.Value = movie_Tbl.time;
             pictureBox1.Image = new Bitmap(new MemoryStream(movie_Tbl.ImageFile, 0, movie_Tbl.ImageFile.Length));
             openFileDialog1.FileName = pictureBox1.ImageLocation;
 
@@ -50,7 +53,6 @@ namespace Project.Contents.Admin
             {
                 pictureBox1.Load(openFileDialog1.FileName);
             }
-
         }
 
         private void Exit_Click(object sender, EventArgs e)
@@ -75,7 +77,7 @@ namespace Project.Contents.Admin
             movie_Tbl.time = DTP_time.Value;
             movie_Tbl.Image = openFileDialog1.FileName;
 
-            int chk = dbuse.MovieInsert(movie_Tbl);
+            int chk = dbuse.MovieUpdate(movie_Tbl);
             if (chk == 0)
             {
                 content.selectList();

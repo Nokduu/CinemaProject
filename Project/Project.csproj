@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Admin\AdminCinemaContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contents\Admin\AdminCinemaContent.Designer.cs">
+      <DependentUpon>AdminCinemaContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Contents\Admin\AdminMovieUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,7 @@
     <Compile Include="Database\DB_Connect.cs" />
     <Compile Include="Database\Model\Cineam_tbl.cs" />
     <Compile Include="Database\Model\Cinema_Movie_tbl.cs" />
+    <Compile Include="Database\Model\Cinema_Theater_Seat.cs" />
     <Compile Include="Database\Model\Member_tbl.cs" />
     <Compile Include="Database\Model\Movie_tbl.cs" />
     <Compile Include="Database\Model\Per_Seat_tbl.cs" />
@@ -129,6 +136,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Contents\Admin\AdminCinemaContent.resx">
+      <DependentUpon>AdminCinemaContent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contents\Admin\AdminMovieUpdate.resx">
       <DependentUpon>AdminMovieUpdate.cs</DependentUpon>
     </EmbeddedResource>

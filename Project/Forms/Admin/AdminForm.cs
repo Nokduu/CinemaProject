@@ -18,6 +18,7 @@ namespace Project
         Member_tbl memberTbl;
         MainContent mainContent;
         AdminMovieContent movieContent;
+        AdminCinemaContent cinemaContent;
     
 
         public AdminForm()
@@ -25,6 +26,7 @@ namespace Project
             InitializeComponent();
             mainContent = new MainContent();
             movieContent = new AdminMovieContent();
+            cinemaContent = new AdminCinemaContent();
             MainCheck_Change();
         }
         public AdminForm(Member_tbl memberTbl)
@@ -39,6 +41,7 @@ namespace Project
             mainContent.TopLevel = false;
             mainContent.TopMost = true;
             mainContent.Parent = this;
+            mainContent.Dock = DockStyle.Fill;
 
             ContentPanel.Controls.Clear();
             ContentPanel.Controls.Add(mainContent);
@@ -50,12 +53,24 @@ namespace Project
             movieContent.TopLevel = false;
             movieContent.TopMost = true;
             movieContent.Parent = this;
+            movieContent.Dock = DockStyle.Fill;
 
             ContentPanel.Controls.Clear();
             ContentPanel.Controls.Add(movieContent);
             movieContent.Show();
         }
-        
+        private void CinemaCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            cinemaContent.TopLevel = false;
+            cinemaContent.TopMost = true;
+            cinemaContent.Parent = this;
+            cinemaContent.Dock = DockStyle.Fill;
+
+            ContentPanel.Controls.Clear();
+            ContentPanel.Controls.Add(cinemaContent);
+            cinemaContent.Show();
+        }
+
 
         private void btn_CheckedChanged(object sender, EventArgs e)
         {
@@ -67,5 +82,6 @@ namespace Project
                 MovieCheck_Change();
             }
         }
+
     }
 }

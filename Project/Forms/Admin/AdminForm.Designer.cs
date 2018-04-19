@@ -45,7 +45,7 @@
             this.PanelLeft.Location = new System.Drawing.Point(0, 0);
             this.PanelLeft.Margin = new System.Windows.Forms.Padding(0);
             this.PanelLeft.Name = "PanelLeft";
-            this.PanelLeft.Size = new System.Drawing.Size(200, 451);
+            this.PanelLeft.Size = new System.Drawing.Size(240, 795);
             this.PanelLeft.TabIndex = 0;
             // 
             // CinemaCheck
@@ -54,10 +54,11 @@
             this.CinemaCheck.Dock = System.Windows.Forms.DockStyle.Top;
             this.CinemaCheck.Location = new System.Drawing.Point(0, 48);
             this.CinemaCheck.Name = "CinemaCheck";
-            this.CinemaCheck.Size = new System.Drawing.Size(200, 24);
+            this.CinemaCheck.Size = new System.Drawing.Size(240, 24);
             this.CinemaCheck.TabIndex = 2;
             this.CinemaCheck.Text = "radioButton3";
             this.CinemaCheck.UseVisualStyleBackColor = true;
+            this.CinemaCheck.CheckedChanged += new System.EventHandler(this.CinemaCheck_CheckedChanged);
             // 
             // MovieCheck
             // 
@@ -65,7 +66,7 @@
             this.MovieCheck.Dock = System.Windows.Forms.DockStyle.Top;
             this.MovieCheck.Location = new System.Drawing.Point(0, 24);
             this.MovieCheck.Name = "MovieCheck";
-            this.MovieCheck.Size = new System.Drawing.Size(200, 24);
+            this.MovieCheck.Size = new System.Drawing.Size(240, 24);
             this.MovieCheck.TabIndex = 1;
             this.MovieCheck.Text = "radioButton2";
             this.MovieCheck.UseVisualStyleBackColor = true;
@@ -78,7 +79,7 @@
             this.MainCheck.Dock = System.Windows.Forms.DockStyle.Top;
             this.MainCheck.Location = new System.Drawing.Point(0, 0);
             this.MainCheck.Name = "MainCheck";
-            this.MainCheck.Size = new System.Drawing.Size(200, 24);
+            this.MainCheck.Size = new System.Drawing.Size(240, 24);
             this.MainCheck.TabIndex = 0;
             this.MainCheck.TabStop = true;
             this.MainCheck.Text = "radioButton1";
@@ -91,19 +92,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ContentPanel.AutoScroll = true;
-            this.ContentPanel.Location = new System.Drawing.Point(200, 0);
+            this.ContentPanel.Location = new System.Drawing.Point(240, 0);
             this.ContentPanel.Margin = new System.Windows.Forms.Padding(0);
             this.ContentPanel.Name = "ContentPanel";
-            this.ContentPanel.Size = new System.Drawing.Size(584, 450);
+            this.ContentPanel.Size = new System.Drawing.Size(820, 794);
             this.ContentPanel.TabIndex = 1;
             // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 451);
+            this.ClientSize = new System.Drawing.Size(1060, 795);
             this.Controls.Add(this.ContentPanel);
             this.Controls.Add(this.PanelLeft);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AdminForm";
             this.Text = "MainForm";
             this.PanelLeft.ResumeLayout(false);

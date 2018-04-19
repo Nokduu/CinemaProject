@@ -129,7 +129,7 @@ namespace Project.Database
 
         public List<Movie_tbl> MovieList()
         {
-            String sql = "SELECT * FROM movie_tbl";
+            String sql = "SELECT Movie_No, Title, Genre, TO_CHAR(playdate,'YYYY-MM-DD'), TO_CHAR(time,'HH:MI'), Image FROM movie_tbl";
             Movie_tbl movie;
             List<Movie_tbl> list = new List<Movie_tbl>();
             OracleDataReader dataReader = null;
@@ -171,9 +171,10 @@ namespace Project.Database
             return list;
         }
 
-        public void MovieUpdate(Movie_tbl movie_Tbl)
+        public int MovieUpdate(Movie_tbl movie_Tbl)
         {
             String sql = "";
+            int chk = 0;
 
             try
             {
@@ -204,11 +205,14 @@ namespace Project.Database
             {
                 MessageBox.Show("업데이트 실패");
                 Console.WriteLine(e);
+                chk = 1;
             }
             finally
             {
                 con.Close();
             }
+
+            return chk;
         }
 
         public int MovieInsert(Movie_tbl movie_Tbl)
@@ -253,6 +257,67 @@ namespace Project.Database
                 con.Close();
             }
             return chk;
+        }
+
+        public void MovieDelete(int movie_no)
+        {
+            String sql = "";
+
+            try
+            {
+                sql += "DELETE FROM MOVIE_TBL WHERE Movie_no='" + movie_no + "'";
+
+                if(MessageBox.Show("정말 삭제하시겠습니까?", "영화 삭제", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    con.Open();
+                    cmd = new OracleCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("삭제 완료");
+                }
+                else
+                {
+                    return;
+                }
+
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public DataTable CinemaList()
+        {
+            String sql = "";
+            DataTable dt = null;
+            try
+            {
+                con.Open();
+
+                sql += "SELECT C.Cinema_No, C.name, T.Theater_No, S.Seat_No, S.Seat_row, S.Seat_col ";
+                sql += "FROM Cinema_tbl C, Theater_tbl T, Seat_tbl S ";
+                sql += "WHERE C.Cinema_No = T.Cinema_No AND T.Theater_No = S.Theater_No";
+
+                OracleDataAdapter oda = new OracleDataAdapter();
+                oda.SelectCommand = new OracleCommand(sql, con);
+                dt = new DataTable();
+                oda.Fill(dt);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show(e + "");
+            }
+
+
+
+            return dt;
         }
     }
 }
