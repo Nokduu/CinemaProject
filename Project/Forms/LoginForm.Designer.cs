@@ -60,8 +60,7 @@
             this.BT_register.Size = new System.Drawing.Size(221, 71);
             this.BT_register.TabIndex = 2;
             this.BT_register.UseVisualStyleBackColor = true;
-            this.BT_register.Click += new System.EventHandler(this.BT_login_Click);
-            this.BT_register.Paint += new System.Windows.Forms.PaintEventHandler(this.BT_login_Paint);
+            this.BT_register.Click += new System.EventHandler(this.BT_register_Click);
             // 
             // TB_pw
             // 
@@ -83,6 +82,7 @@
             this.button1.Size = new System.Drawing.Size(221, 71);
             this.button1.TabIndex = 3;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BT_login_Click);
             // 
             // button2
             // 
@@ -140,7 +140,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoginForm";
             this.Text = "Form1";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.LoginForm_Paint);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

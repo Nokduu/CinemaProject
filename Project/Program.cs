@@ -22,10 +22,9 @@ namespace Project
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-           // LoginForm lf = new LoginForm();
-           // ac.MainForm = lf;
-
-            Application.Run(new LoginForm());
+            LoginForm lf = new LoginForm();
+            ac.MainForm = lf;
+            Application.Run(ac);
         }
     }
 }

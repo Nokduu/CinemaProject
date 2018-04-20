@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Project.Database.Model;
 
 namespace Project
 {
@@ -21,38 +22,32 @@ namespace Project
 
         private void BT_login_Click(object sender, EventArgs e)
         {
-            Database.Model.Member_tbl memberTbl = new Database.Model.Member_tbl();
-            memberTbl.id = TB_id.Text;
-            memberTbl.password = TB_pw.Text;
-            memberTbl.Member_No = dbuse.Login(memberTbl);
-
-            if (memberTbl.Member_No != 0)
+            Member_tbl member_Tbl = new Member_tbl();
+            member_Tbl.id = TB_id.Text;
+            member_Tbl.password = TB_pw.Text;
+            member_Tbl.Member_No = dbuse.Login(member_Tbl);
+            if(member_Tbl.Member_No != 0)
             {
-                if (memberTbl.id.Equals("admin") && memberTbl.password.Equals("admin"))
+                if (member_Tbl.id.Equals("admin") || member_Tbl.password.Equals("admin"))
                 {
-                    AdminForm adminForm = new AdminForm();
+                    AdminForm adminForm = new AdminForm(member_Tbl);
                     adminForm.Show();
-                    Program.ac.MainForm = adminForm;
                     this.Close();
                 }
                 else
                 {
-                    MainForm mainForm = new MainForm(memberTbl);
+                    MainForm mainForm = new MainForm(member_Tbl);
                     mainForm.Show();
-                    Program.ac.MainForm = mainForm;
                     this.Close();
+
                 }
             }
         }
-
-        private void label1_Click(object sender, EventArgs e)
+        
+        private void BT_register_Click(object sender, EventArgs e)
         {
             SignUp su = new SignUp();
             su.ShowDialog();
-        }
-
-        private void BT_login_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 
@@ -66,10 +61,6 @@ namespace Project
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void LoginForm_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect
                                                       , int nTopRect
@@ -77,5 +68,7 @@ namespace Project
                                                       , int nBottomRect
                                                       , int nWidthEllipse
                                                       , int nHeightEllipse);
+
+    
     }
 }
