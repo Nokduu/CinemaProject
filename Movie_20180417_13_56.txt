@@ -143,19 +143,19 @@ ALTER TABLE Time_tbl
 -- Theater_tbl Table Create SQL
 CREATE TABLE Theater_tbl
 (
-    Cinema_No     NUMBER(18, 0)    NOT NULL, 
     Theater_No    NUMBER(18, 0)    NOT NULL, 
-    CONSTRAINT THEATER_TBL_PK PRIMARY KEY (Cinema_No, Theater_No)
+    Cinema_No     NUMBER(18, 0)    NOT NULL, 
+    CONSTRAINT THEATER_TBL_PK PRIMARY KEY (Theater_No)
 )
 /
 
 COMMENT ON TABLE Theater_tbl IS '상영관 정보'
 /
 
-COMMENT ON COLUMN Theater_tbl.Cinema_No IS '영화관 번호'
+COMMENT ON COLUMN Theater_tbl.Theater_No IS '상영관 번호'
 /
 
-COMMENT ON COLUMN Theater_tbl.Theater_No IS '상영관 번호'
+COMMENT ON COLUMN Theater_tbl.Cinema_No IS '영화관 번호'
 /
 
 ALTER TABLE Theater_tbl
@@ -182,7 +182,6 @@ CREATE SEQUENCE Member_tbl_SEQ
 START WITH 1
 INCREMENT BY 1;
 /
-
 
 COMMENT ON TABLE Member_tbl IS '회원 정보'
 /
