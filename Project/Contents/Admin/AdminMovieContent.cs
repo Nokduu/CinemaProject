@@ -36,8 +36,8 @@ namespace Project.Contents.Admin
             {
                 panel = new Panel();
                 panel.BackColor = Color.White;
-                panel.Height = 320;
-                panel.Width = 240;
+                panel.Height = 300;
+                panel.Width = 200;
                 
 
                 Label No_Title = new Label();
@@ -56,15 +56,10 @@ namespace Project.Contents.Admin
                 genre.Dock = DockStyle.Top;
                 genre.TextAlign = ContentAlignment.MiddleCenter;
 
-                Label playdate = new Label();
-                playdate.Text = "상영날짜:" + list[i].playdate.ToString("yyyy-MM-dd");
-                playdate.Dock = DockStyle.Top;
-                playdate.TextAlign = ContentAlignment.MiddleCenter;
-
-                Label time = new Label();
-                time.Text = "상영 시간:" + list[i].time.ToString("HH:mm");
-                time.Dock = DockStyle.Top;
-                time.TextAlign = ContentAlignment.MiddleCenter;
+                Label times = new Label();
+                times.Text = "상영날짜:"+list[i].playdate + "/상영 시간:" + list[i].time;
+                times.Dock = DockStyle.Top;
+                times.TextAlign = ContentAlignment.MiddleLeft;
 
 
                 Panel btn_panel = new Panel();
@@ -90,8 +85,7 @@ namespace Project.Contents.Admin
                 btn_panel.Controls.Add(btn_update);
 
                 panel.Controls.Add(btn_panel);
-                panel.Controls.Add(time);
-                panel.Controls.Add(playdate);
+                panel.Controls.Add(times);
                 panel.Controls.Add(genre);
                 panel.Controls.Add(pb);
                 panel.Controls.Add(No_Title);
@@ -105,11 +99,7 @@ namespace Project.Contents.Admin
         private void movie_delete(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            int movie_no = 0;
-            try { movie_no = Convert.ToInt32(btn.Tag); }catch(Exception ex) { Console.WriteLine(ex); }
-
-            dbuse.MovieDelete(movie_no);
-            selectList();
+            MessageBox.Show(btn.Tag + "");
         }
 
         private void movie_update(object sender, EventArgs e)
