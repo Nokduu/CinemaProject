@@ -98,7 +98,6 @@
             this.BT_login.Size = new System.Drawing.Size(221, 71);
             this.BT_login.TabIndex = 8;
             this.BT_login.UseVisualStyleBackColor = true;
-            this.BT_login.Click += new System.EventHandler(this.BT_login_Click);
             // 
             // button1
             // 
@@ -111,7 +110,6 @@
             this.button1.Size = new System.Drawing.Size(221, 71);
             this.button1.TabIndex = 9;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 

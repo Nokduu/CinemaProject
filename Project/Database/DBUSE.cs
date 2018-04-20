@@ -36,9 +36,11 @@ namespace Project.Database
                 cmd.Connection = con;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
+                MessageBox.Show("회원가입 성공");
             }catch(Exception e)
             {
-                MessageBox.Show(e + "");
+                Console.WriteLine(e);
+                MessageBox.Show("회원가입 실패");                
             }
             finally
             {
