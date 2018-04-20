@@ -69,5 +69,9 @@ namespace Project.Contents.Admin
             }
         }
 
+        private void AdminMovieAdd_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
