@@ -42,9 +42,7 @@ namespace Project.Contents.Admin
             DTP_time.MinDate = movie_Tbl.time;
             DTP_time.Value = movie_Tbl.time;
             pictureBox1.Image = new Bitmap(new MemoryStream(movie_Tbl.ImageFile, 0, movie_Tbl.ImageFile.Length));
-            openFileDialog1.FileName = pictureBox1.ImageLocation;
-
-
+            
         }
 
         private void BTN_image_Click(object sender, EventArgs e)

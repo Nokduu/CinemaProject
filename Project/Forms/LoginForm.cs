@@ -82,5 +82,10 @@ namespace Project
         {
 
         }
+        private void BT_register_Click(object sender, EventArgs e)
+        {
+            SignUp signUp = new SignUp();
+            signUp.Show();
+        }
     }
 }
