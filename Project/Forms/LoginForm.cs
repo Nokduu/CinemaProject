@@ -77,15 +77,5 @@ namespace Project
                                                       , int nBottomRect
                                                       , int nWidthEllipse
                                                       , int nHeightEllipse);
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void BT_register_Click(object sender, EventArgs e)
-        {
-            SignUp signUp = new SignUp();
-            signUp.Show();
-        }
     }
 }

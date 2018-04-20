@@ -113,6 +113,9 @@ namespace Project.Database
                     movie.ImageFile = (byte[])reader.GetValue(4);
                 }
 
+
+
+
             }catch(Exception e)
             {
                 Console.WriteLine(e);
@@ -203,7 +206,6 @@ namespace Project.Database
             catch (Exception e)
             {
                 MessageBox.Show("업데이트 실패");
-                MessageBox.Show(e + "");
                 Console.WriteLine(e);
                 chk = 1;
             }
@@ -299,7 +301,9 @@ namespace Project.Database
             {
                 con.Open();
 
-                sql += "SELECT Cinema_No, name FROM CINEMA_TBL";
+                sql += "SELECT C.Cinema_No, C.name, T.Theater_No, S.Seat_No, S.Seat_row, S.Seat_col ";
+                sql += "FROM Cinema_tbl C, Theater_tbl T, Seat_tbl S ";
+                sql += "WHERE C.Cinema_No = T.Cinema_No AND T.Theater_No = S.Theater_No";
 
                 OracleDataAdapter oda = new OracleDataAdapter();
                 oda.SelectCommand = new OracleCommand(sql, con);

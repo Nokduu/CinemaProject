@@ -47,11 +47,5 @@ namespace Project.Forms
         {
             this.Close();
         }
-        
-
-        private void BT_login_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

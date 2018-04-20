@@ -44,7 +44,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(733, 12);
+            this.button1.Location = new System.Drawing.Point(497, 13);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -56,10 +56,10 @@
             // 
             this.FLP1.AutoScroll = true;
             this.FLP1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.FLP1.Location = new System.Drawing.Point(60, 40);
+            this.FLP1.Location = new System.Drawing.Point(2, 40);
             this.FLP1.Margin = new System.Windows.Forms.Padding(0);
             this.FLP1.Name = "FLP1";
-            this.FLP1.Size = new System.Drawing.Size(751, 746);
+            this.FLP1.Size = new System.Drawing.Size(580, 410);
             this.FLP1.TabIndex = 3;
             // 
             // AdminMovieContent
@@ -67,7 +67,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(820, 795);
+            this.ClientSize = new System.Drawing.Size(584, 450);
             this.Controls.Add(this.FLP1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
