@@ -1,5 +1,8 @@
 ﻿using Project.Forms;
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Project
@@ -12,6 +15,8 @@ namespace Project
         {
             InitializeComponent();
             dbuse = new Database.DBUSE();
+
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 50, 50));
         }
 
         private void BT_login_Click(object sender, EventArgs e)
@@ -44,6 +49,38 @@ namespace Project
         {
             SignUp su = new SignUp();
             su.ShowDialog();
+        }
+
+        private void BT_login_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void LoginForm_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(int nLeftRect
+                                                      , int nTopRect
+                                                      , int nRightRect
+                                                      , int nBottomRect
+                                                      , int nWidthEllipse
+                                                      , int nHeightEllipse);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
