@@ -31,7 +31,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.TB_id = new System.Windows.Forms.TextBox();
-            this.BT_register = new System.Windows.Forms.Button();
+            this.BT_login = new System.Windows.Forms.Button();
             this.TB_pw = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -49,18 +49,19 @@
             this.TB_id.Size = new System.Drawing.Size(275, 32);
             this.TB_id.TabIndex = 0;
             // 
-            // BT_register
+            // BT_login
             // 
-            this.BT_register.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_register.BackgroundImage")));
-            this.BT_register.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.BT_register.FlatAppearance.BorderSize = 0;
-            this.BT_register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_register.Location = new System.Drawing.Point(280, 600);
-            this.BT_register.Name = "BT_register";
-            this.BT_register.Size = new System.Drawing.Size(221, 71);
-            this.BT_register.TabIndex = 2;
-            this.BT_register.UseVisualStyleBackColor = true;
-            this.BT_register.Click += new System.EventHandler(this.BT_register_Click);
+            this.BT_login.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_login.BackgroundImage")));
+            this.BT_login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BT_login.FlatAppearance.BorderSize = 0;
+            this.BT_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_login.Location = new System.Drawing.Point(280, 600);
+            this.BT_login.Name = "BT_login";
+            this.BT_login.Size = new System.Drawing.Size(221, 71);
+            this.BT_login.TabIndex = 2;
+            this.BT_login.UseVisualStyleBackColor = true;
+            this.BT_login.Click += new System.EventHandler(this.BT_login_Click);
+            this.BT_login.Paint += new System.Windows.Forms.PaintEventHandler(this.BT_login_Paint);
             // 
             // TB_pw
             // 
@@ -82,7 +83,6 @@
             this.button1.Size = new System.Drawing.Size(221, 71);
             this.button1.TabIndex = 3;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.BT_login_Click);
             // 
             // button2
             // 
@@ -135,11 +135,12 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TB_pw);
-            this.Controls.Add(this.BT_register);
+            this.Controls.Add(this.BT_login);
             this.Controls.Add(this.TB_id);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "LoginForm";
             this.Text = "Form1";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.LoginForm_Paint);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -149,7 +150,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox TB_id;
-        private System.Windows.Forms.Button BT_register;
+        private System.Windows.Forms.Button BT_login;
         private System.Windows.Forms.TextBox TB_pw;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
